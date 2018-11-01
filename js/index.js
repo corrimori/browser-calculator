@@ -9,12 +9,6 @@ const clearInput = () => {
 
 const calculateInput = () => {
   console.log('calculation of Input ********')
-  // (inputButton.match(/[+\-÷x]/))
-  // calculate equation
-  // split string
-  // test / 0 case
-  // calculate
-
 }
 
 let getAllSpan = document.querySelectorAll('span')
@@ -32,6 +26,9 @@ getAllSpan.forEach(element => {
 
     if (inputButton == 'C') {
       clearInput()
+      document.getElementById('screen').innerText = ''
+      calculation = 0
+      console.log('calc>>', calculation)
       // console.log('clear button pushed ********')
       // // clear screen
       // document.getElementById('screen').innerHTML = 'cleared'
@@ -62,6 +59,7 @@ getAllSpan.forEach(element => {
 
       calculation = eval(`${num[0]} ${operator} ${num[1]}`)
       console.log('calculation', calculation)
+      document.getElementById('screen').innerText = calculation
       // test / 0 case
       // calculate
     }
