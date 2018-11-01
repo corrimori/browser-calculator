@@ -1,5 +1,21 @@
 // let num = document.querySelector('span')
 // num.addEventListener("click", function(){console.log('its working')})
+let calculation = 0
+
+const clearInput = () => {
+  console.log('clear button pushed ********')
+  document.getElementById('screen').innerHTML = 'cleared'
+}
+
+const calculateInput = () => {
+  console.log('calculation of Input ********')
+  // (inputButton.match(/[+\-÷x]/))
+  // calculate equation
+  // split string
+  // test / 0 case
+  // calculate
+
+}
 
 let getAllSpan = document.querySelectorAll('span')
 console.log('get all span---->', getAllSpan);
@@ -9,54 +25,86 @@ getAllSpan.forEach(element => {
 
   element.addEventListener("click", () => {
     let displayNumber = document.getElementById('screen').innerHTML
-    //get number to calculate
+    // get number to calculate
     let inputButton = element.innerHTML
-    count = count + 1
-    // write input number to display on screen
-    document.getElementById('screen').innerHTML = displayNumber + inputButton
+
+
+
+    if (inputButton == 'C') {
+      clearInput()
+      // console.log('clear button pushed ********')
+      // // clear screen
+      // document.getElementById('screen').innerHTML = 'cleared'
+      // let calculation = 0
+    }
+
+    // ********* write input number to display on calculator screen
+    // displayNumber = displayNumber + inputButton
+    document.getElementById('screen').innerText = displayNumber + inputButton
+
     console.log('displayNumber>>', displayNumber)
     console.log('inputButton>>', inputButton);
+
+    if (inputButton == '=') {
+      console.log('equal button pushed @@@@@@@@@@')
+      operator = displayNumber.match(/[+\-÷x]/)[0]
+      console.log('operator', operator)
+      num = displayNumber.split(operator)
+      console.log('eval', eval);
+      if (operator === 'x') { operator = '*'}
+      if (operator === '÷') { operator = '/'}
+      calculation = eval(`${num[0]} ${operator} ${num[1]}`)
+      console.log('calculation', calculation)
+      // calculate equation
+      // split string
+      // test / 0 case
+      // calculate
+    }
+
     // if (inputButton == "=") {
       // console.log('inside if ======')
       // If ( operator === '/' && num2 === '0') {
       //   document.getElementById('screen').innerHTML = 'Error'
       // } else {
     // }
-    if (document.getElementsByClassName('equals')) {
-      If ( operator === '/' && num2 === '0') {
-        document.getElementById('screen').innerHTML = 'Error'
-      } else {
+    // let equalInput = document.querySelector('#equals')
+    // if (equalInput) {
+    //   console.log('equalInput---->>', equalInput);
+    //   let equation = displayNumber.split('')
+    //   console.log('equation--->>', equation);
 
 
 
+    // if (document.getElementsByClassName('equals')) {
+    //   If ( operator === '/' && num2 === '0') {
+    //     document.getElementById('screen').innerHTML = 'Error'
+    //   } else {
+    // }
 
-    }
+  }) // close element.addEventListener loop
+}) // getAllSpan for each
 
-  })
   // console.log('done with forEach');
   console.log('outside forEach>>', document.getElementById('screen').innerHTML);
 
     // take displayNumber split apart and calculate equation
 
-  }
+  // }
 
   // console.log('element by class>>', document.getElementsByClassName('operator'));
   // if (element = document.getElementByClass('operator'))
 
-})
 
 // test if num =
 //
-const calculateInput = () => {
 
-}
 
 
 
 // ===============================================================
 // click on number + cat until operator is clicked
 // when "=" is clicked, test if valid
-if expression is format 'num (+|-|x|/) num' calculate expressions
+// if expression is format 'num (+|-|x|/) num' calculate expressions
 //     - update screen with result
 //     ELSE  if num / 0
 //          'Error'
