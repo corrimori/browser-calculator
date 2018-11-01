@@ -51,12 +51,17 @@ getAllSpan.forEach(element => {
       console.log('operator', operator)
       num = displayNumber.split(operator)
       console.log('eval', eval);
+
+      // change operator so can be evaluated, x to *, ÷ to /
+      // test num/0 = error
       if (operator === 'x') { operator = '*'}
-      if (operator === '÷') { operator = '/'}
+      if (operator === '÷') {
+        operator = '/'
+        if (num[1] === '0') { document.getElementById('screen').innerText = 'error' }
+      }
+
       calculation = eval(`${num[0]} ${operator} ${num[1]}`)
       console.log('calculation', calculation)
-      // calculate equation
-      // split string
       // test / 0 case
       // calculate
     }
