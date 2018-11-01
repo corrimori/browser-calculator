@@ -4,115 +4,73 @@ let calculation = 0
 
 const clearInput = () => {
   console.log('clear button pushed ********')
-  document.getElementById('screen').innerHTML = 'cleared'
+  document.getElementById('screen').innerHTML = ''
+  // document.getElementById('screen').innerText = ''
+  calculation = 0
+  console.log('calc>>', calculation)
 }
 
-const calculateInput = () => {
-  console.log('calculation of Input ********')
-}
+// create a function to do calculations
+// const calculateInput = () => {
+//   console.log('calculation of Input ********')
+// }
 
 let getAllSpan = document.querySelectorAll('span')
 console.log('get all span---->', getAllSpan);
 let count = 0
 
 getAllSpan.forEach(element => {
-
   element.addEventListener("click", () => {
+
     let displayNumber = document.getElementById('screen').innerHTML
-    // get number to calculate
     let inputButton = element.innerHTML
-
-
-
-    if (inputButton == 'C') {
-      clearInput()
-      document.getElementById('screen').innerText = ''
-      calculation = 0
-      console.log('calc>>', calculation)
-      // console.log('clear button pushed ********')
-      // // clear screen
-      // document.getElementById('screen').innerHTML = 'cleared'
-      // let calculation = 0
-    }
-
-    // ********* write input number to display on calculator screen
-    // displayNumber = displayNumber + inputButton
-    document.getElementById('screen').innerText = displayNumber + inputButton
 
     console.log('displayNumber>>', displayNumber)
     console.log('inputButton>>', inputButton);
 
-    if (inputButton == '=') {
-      console.log('equal button pushed @@@@@@@@@@')
-      operator = displayNumber.match(/[+\-÷x]/)[0]
-      console.log('operator', operator)
-      num = displayNumber.split(operator)
-      console.log('eval', eval);
+    if (inputButton == 'C') {
+      clearInput()
+    } else {
+      // ********* write input number to display on calculator screen
+      // displayNumber = displayNumber + inputButton  (not working????)
+      document.getElementById('screen').innerText = displayNumber + inputButton
 
-      // change operator so can be evaluated, x to *, ÷ to /
-      // test num/0 = error
-      if (operator === 'x') { operator = '*'}
-      if (operator === '÷') {
-        operator = '/'
-        if (num[1] === '0') { document.getElementById('screen').innerText = 'error' }
+      if (inputButton == '=') {
+        console.log('equal button pushed @@@@@@@@@@')
+        // operator = displayNumber.match(/[+\-÷x]/)[0]
+        operator = displayNumber.match(/[+\-÷x]/)
+        if (!operator) {
+          document.getElementById('screen').innerText = 'error'
+        } else {
+          operator = operator[0]
+          console.log('operator********>>>>>>>', operator)
+          num = displayNumber.split(operator)
+          console.log('num>>', num);
+
+          // change operator so can be evaluated, x to *, ÷ to /
+          // test num/0 = error
+          if (operator === 'x') { operator = '*'}
+          if (operator === '÷') {
+            operator = '/'
+            if (num[1] === '0') { document.getElementById('screen').innerText = 'error' }
+          }
+
+          calculation = eval(`${num[0]} ${operator} ${num[1]}`)
+          console.log('calculation', calculation)
+          document.getElementById('screen').innerText = calculation
+          // test / 0 case
+          // calculate
+        }
       }
 
-      calculation = eval(`${num[0]} ${operator} ${num[1]}`)
-      console.log('calculation', calculation)
-      document.getElementById('screen').innerText = calculation
-      // test / 0 case
-      // calculate
     }
 
-    // if (inputButton == "=") {
-      // console.log('inside if ======')
-      // If ( operator === '/' && num2 === '0') {
-      //   document.getElementById('screen').innerHTML = 'Error'
-      // } else {
-    // }
-    // let equalInput = document.querySelector('#equals')
-    // if (equalInput) {
-    //   console.log('equalInput---->>', equalInput);
-    //   let equation = displayNumber.split('')
-    //   console.log('equation--->>', equation);
-
-
-
-    // if (document.getElementsByClassName('equals')) {
-    //   If ( operator === '/' && num2 === '0') {
-    //     document.getElementById('screen').innerHTML = 'Error'
-    //   } else {
-    // }
 
   }) // close element.addEventListener loop
 }) // getAllSpan for each
 
-  // console.log('done with forEach');
-  console.log('outside forEach>>', document.getElementById('screen').innerHTML);
+console.log('outside forEach>>', document.getElementById('screen').innerHTML);
 
-    // take displayNumber split apart and calculate equation
-
-  // }
-
-  // console.log('element by class>>', document.getElementsByClassName('operator'));
-  // if (element = document.getElementByClass('operator'))
-
-
-// test if num =
-//
-
-
-
-
-// ===============================================================
-// click on number + cat until operator is clicked
-// when "=" is clicked, test if valid
-// if expression is format 'num (+|-|x|/) num' calculate expressions
-//     - update screen with result
-//     ELSE  if num / 0
-//          'Error'
-//     ELSE  'Error'
-// when "C" is clicked, screen = null
 
 // 14 spaces MAX for screen display
 // str.slice(14)
@@ -127,8 +85,6 @@ getAllSpan.forEach(element => {
 // - Click the `equals` button to evaluate the arithmetic expression shown in the screen.
 //   - If the expression is in format `operand(+|-|x|÷)operand`, evaluate the expression and update the screen with the result.
 //   - If the expression isn't in the correct format or when attempting to divide by zero, update the screen with the message `Error`.
-
-
 // -Try to evaluate the expression without using the `eval()` function.
 //
 // ### Bonus 3
